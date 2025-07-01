@@ -24,7 +24,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@Tag(name = "Authentication Management", description = "API for user registration and login") // Anotación a nivel de clase para el Tag
+@Tag(name = "Authentication Management", description = "API for user registration and login")
 public class AuthController {
 
     private final AuthenticationUseCase authUseCase;

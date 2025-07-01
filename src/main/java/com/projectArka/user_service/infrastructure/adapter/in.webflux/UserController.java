@@ -70,7 +70,7 @@ public class UserController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/{userId}/exists") // La ruta completa será /api/users/{userId}/exists
+    @GetMapping("/{userId}/exists")
     @Operation(summary = "Check if a user exists", description = "Checks if a user with the given ID exists in the system.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User existence checked successfully",
