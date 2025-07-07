@@ -129,17 +129,18 @@ public class UserController {
 
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a user by ID", description = "Deletes a user from the system by their unique ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "User deleted successfully"),
+            @ApiResponse(responseCode = "200", description = "User deleted successfully",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))),
             @ApiResponse(responseCode = "404", description = "User not found",
                     content = @Content(schema = @Schema(implementation = String.class)))
     })
-    public Mono<Void> deleteUser(
+    public Mono<ResponseEntity<String>> deleteUser(
             @Parameter(description = "ID of the user to delete", required = true, schema = @Schema(type = "string", format = "uuid"))
             @PathVariable String id) {
         return userUseCase.deleteUserById(id)
+                .thenReturn(ResponseEntity.ok("User deleted"))
                 .onErrorResume(UserNotFoundException.class, Mono::error);
     }
 }

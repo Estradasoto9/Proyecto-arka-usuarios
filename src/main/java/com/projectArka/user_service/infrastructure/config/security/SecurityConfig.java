@@ -49,9 +49,10 @@ public class SecurityConfig {
 
                         .pathMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login").permitAll()
                         .pathMatchers("/swagger-ui/**", "/v3/api-docs/**", "/webjars/**").permitAll()
+
                         .pathMatchers(HttpMethod.POST, "/api/users").hasRole("ADMIN")
-                        .pathMatchers(HttpMethod.PUT, "/api/users/**").hasRole("ADMIN")
-                        .pathMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN")
+                        .pathMatchers(HttpMethod.PUT, "/api/users/**").hasAnyRole("ADMIN", "USER")
+                        .pathMatchers(HttpMethod.DELETE, "/api/users/**").hasAnyRole("ADMIN", "USER")
 
                         .pathMatchers("/api/users/**").authenticated()
                         .anyExchange().authenticated()
